@@ -1,0 +1,17 @@
+services:
+  backend:
+    image: contexta360/backend
+    build: 
+      dockerfile: BackendDockerfile
+    ports:
+      - 5000:5000
+  frontend:
+    image: contexta360/frontend:latest
+    build: 
+      dockerfile: FrontendDockerfile
+    ports:
+      - 8080:8080
+  
+networks:
+  default:
+    name: contexta360
