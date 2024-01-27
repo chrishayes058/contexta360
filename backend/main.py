@@ -43,8 +43,15 @@ def get_factorials():
         factorials = []
         for reading_data in readings:
             reading = reading_data['reading']
+            timestamp = reading_data['timestamp']
             factorial_result = calculate_factorial(reading)
-            factorials.append({'reading': reading, 'factorial': factorial_result})
+            factorials.append(
+                {
+                    'reading': reading, 
+                    'factorial': factorial_result, 
+                    'timestamp': timestamp
+                }
+            )
 
         return jsonify({'status': 'success', 'factorials': factorials})
 

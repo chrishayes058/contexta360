@@ -19,8 +19,8 @@
     <div id="factorials">
       <h2>Factorials</h2>
       <ul>
-        <li v-for="(factorial, reading) in factorials" :key="reading">
-          Reading {{ reading }}: {{ factorial }}
+        <li v-for="factorial_reading in factorials" key=factorial_reading.timestamp >
+          {{ factorial_reading.timestamp }} - Reading {{ factorial_reading.reading }}: {{ factorial_reading.factorial }}, 
         </li>
       </ul>
     </div>
@@ -72,7 +72,11 @@ export default {
       .then(response => response.json())
       .then(data => {
         if (data.status === 'success') {
-          this.factorials = data.factorials;
+          this.factorials = data.factorials.sort((a, b) => {
+          // Assuming timestamps are in ISO format, you can use Date objects for comparison
+          return new Date(a.timestamp) - new Date(b.timestamp);
+        });
+          
         } else {
           console.error('Error:', data.message);
         }
